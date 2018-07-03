@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +40,17 @@ namespace IEX.Api.Data
     */
     public class RecordData
     {
+        #region JSON keys
+        public static readonly string VOLUME_KEY = "volume";
+        public static readonly string SYMBOLS_TRADED_KEY = "symbolsTraded";
+        public static readonly string ROUTED_VOLUME_KEY = "routedVolume";
+        public static readonly string NOTIONAL_KEY = "notional";
+        public static readonly string RECORD_VALUE_KEY = "recordValue";
+        public static readonly string RECORD_DATE_KEY = "recordDate";
+        public static readonly string PREV_DAY_VALUE_KEY = "previousDayValue";
+        public static readonly string AVG30_VALUE_KEY = "avg30Value";
+        #endregion
+
         public class RecordItem<T>
         {
             public RecordItem(T recordValue, DateTime date, string name)
@@ -51,7 +64,42 @@ namespace IEX.Api.Data
             public T RecordValue { get; set; }
             public DateTime Date { get; set; }
             public T PreviousDayValue { get; set; }
-            public T Avg30Value { get; set; }
+            public decimal Avg30Value { get; set; }
+
+            public static RecordItem<T> FromJson(JObject json, string name)
+            {
+                try
+                {
+                    var converter = TypeDescriptor.GetConverter(typeof(T));
+                    if (converter != null)
+                    {
+                        T value = (T)converter.ConvertFromString(JsonHelper.GetValue(json, RECORD_VALUE_KEY));
+                        DateTime date = DateTime.ParseExact(JsonHelper.GetValue(json, RECORD_DATE_KEY), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                        RecordItem<T> record = new RecordItem<T>(value, date, name)
+                        {
+                            PreviousDayValue = (T)converter.ConvertFromString(JsonHelper.GetValue(json, PREV_DAY_VALUE_KEY)),
+                            Avg30Value = JsonHelper.GetDecimalValue(json, AVG30_VALUE_KEY)
+                        };
+                        return record;
+                    }
+                    return null;
+                }
+                catch (NotSupportedException e)
+                {
+                    return null;
+                }
+            } // end FromJson
+
+            public override string ToString()
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append(Name).Append(" Record").Append(Environment.NewLine).
+                    Append("\tRecord Value       = ").Append(RecordValue).Append(Environment.NewLine).
+                    Append("\tRecord Data        = ").Append(Date).Append(Environment.NewLine).
+                    Append("\tPrevious Day Value = ").Append(PreviousDayValue).Append(Environment.NewLine).
+                    Append("\tAvg 30 Day         = ").Append(Avg30Value);
+                return stringBuilder.ToString();
+            }
         } // end class RecordItem
 
         public RecordItem<long> VolumeRecord { get; set; }
@@ -62,9 +110,19 @@ namespace IEX.Api.Data
 
         public RecordItem<decimal> RecordNotional { get; set; }
 
-        public RecordData FromJson(JObject json)
+        public static RecordData FromJson(JObject json)
         {
             RecordData recordData = new RecordData();
+
+            var volumeJson = (JObject)json.GetValue(VOLUME_KEY);
+            var symbolsTradedJson = (JObject)json.GetValue(SYMBOLS_TRADED_KEY);
+            var routedVolumeJson = (JObject)json.GetValue(ROUTED_VOLUME_KEY);
+            var notionalJson = (JObject)json.GetValue(NOTIONAL_KEY);
+
+            if (volumeJson != null) recordData.VolumeRecord = RecordItem<long>.FromJson(volumeJson, "Volume");
+            if (symbolsTradedJson != null) recordData.RecordSymbolsTraded = RecordItem<long>.FromJson(symbolsTradedJson, "Symbols Traded");
+            if (routedVolumeJson != null) recordData.RecordRoutedVolume = RecordItem<long>.FromJson(routedVolumeJson, "Routed Volume");
+            if (notionalJson != null) recordData.RecordNotional = RecordItem<decimal>.FromJson(notionalJson, "Notional");
 
             return recordData;
         }
@@ -82,7 +140,6 @@ namespace IEX.Api.Data
             appendItem(stringBuilder, VolumeRecord);
             appendItem(stringBuilder, RecordSymbolsTraded);
             appendItem(stringBuilder, RecordRoutedVolume);
-            appendItem(stringBuilder, VolumeRecord);
             appendItem(stringBuilder, RecordNotional);
 
             return stringBuilder.ToString();

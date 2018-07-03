@@ -12,9 +12,11 @@ namespace IEX.Api
     {
         public static readonly string INTRADAY_FUNC = "stats/intraday";
         public static readonly string RECENT_FUNC = "stats/recent";
+        public static readonly string RECORD_FUNC = "stats/records";
 
         public static readonly string INTRADAY_URL = BASE_URL + INTRADAY_FUNC;
         public static readonly string RECENT_URL = BASE_URL + RECENT_FUNC;
+        public static readonly string RECORD_URL = BASE_URL + RECORD_FUNC;
 
         public IexIntradayStat RequestIexIntradayStat()
         {
@@ -40,9 +42,13 @@ namespace IEX.Api
             }
         }
 
-        public void IexRecords()
+        public RecordData RequestRecordData()
         {
-            throw new NotImplementedException();
+            var json = Request(RECORD_URL).Result;
+            if (!(json is JObject)) return null;
+
+            RecordData recordData = RecordData.FromJson((JObject)json);
+            return recordData;
         }
 
         public void IexHistoricalSummary()
