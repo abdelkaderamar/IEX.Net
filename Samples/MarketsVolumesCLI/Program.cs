@@ -13,11 +13,21 @@ namespace MarketsVolumesCLI
         {
             IexMarketProvider marketProvider = new IexMarketProvider();
             var marketDataDict = marketProvider.RequestMarketData();
+            Console.WriteLine("Getting markets data");
             foreach (var market in marketDataDict.Values)
             {
                 Console.WriteLine(market);
             }
-            
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX Intraday stats");
+            var iexStatProvider = new IexStatProvider();
+            var iexIntradayStat = iexStatProvider.RequestIexIntradayStat();
+            Console.WriteLine(iexIntradayStat);
+
+
+            Console.ReadKey();
         }
     }
 }

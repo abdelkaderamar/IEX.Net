@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IexIntradayStat.cs" />
     <Compile Include="IexMarketProvider.cs" />
     <Compile Include="IexProvider.cs" />
+    <Compile Include="IexStatProvider.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MarketData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
