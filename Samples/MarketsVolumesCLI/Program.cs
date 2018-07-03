@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IEX.Api;
+using IEX.Api.Data;
 
 namespace MarketsVolumesCLI
 {
@@ -26,6 +27,15 @@ namespace MarketsVolumesCLI
             var iexIntradayStat = iexStatProvider.RequestIexIntradayStat();
             Console.WriteLine(iexIntradayStat);
 
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX recent stats");
+            var iexRecentStats = iexStatProvider.RequestIexRecentStat();
+            foreach (var histoData in iexRecentStats)
+            {
+                Console.WriteLine(histoData);
+            }
 
             Console.ReadKey();
         }

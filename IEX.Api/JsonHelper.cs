@@ -62,5 +62,13 @@ namespace IEX.Api
             dtDateTime = dtDateTime.AddMilliseconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
         }
+
+        public static bool GetBooleanValue(JObject json, string property, bool defaultValue = false)
+        {
+            var str = GetValue(json, property);
+            bool value;
+            if (bool.TryParse(str, out value)) return value;
+            return defaultValue;
+        }
     }
 }

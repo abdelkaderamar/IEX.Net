@@ -8,13 +8,13 @@ namespace IEX.Api
 {
     public enum RequestType { Daily, DailyAdjusted, Weekly, WeeklyAdjusted, Monthly, MonthlyAdjusted }
 
-    public abstract class IexProvider
+    public abstract class IexAbstractProvider
     {
         public static readonly string BASE_URL = "https://api.iextrading.com/1.0/";
 
         private HttpClient _httpClient;
 
-        public IexProvider()
+        public IexAbstractProvider()
         {
             _httpClient = new HttpClient();
         }

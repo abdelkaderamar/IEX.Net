@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Text;
 
-namespace IEX.Api
+namespace IEX.Api.Data
 {
     public class MarketData
     {

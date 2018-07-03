@@ -44,12 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IexIntradayStat.cs" />
+    <Compile Include="Data\HistoricalData.cs" />
+    <Compile Include="Data\IexIntradayStat.cs" />
     <Compile Include="IexMarketProvider.cs" />
-    <Compile Include="IexProvider.cs" />
+    <Compile Include="IexAbstractProvider.cs" />
     <Compile Include="IexStatProvider.cs" />
     <Compile Include="JsonHelper.cs" />
-    <Compile Include="MarketData.cs" />
+    <Compile Include="Data\MarketData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace IEX.Api
+namespace IEX.Api.Data
 {
     public class IexIntradayStat
     {

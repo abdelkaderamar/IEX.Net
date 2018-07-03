@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
+using IEX.Api.Data;
 
 namespace IEX.Api
 {
-    public class IexMarketProvider : IexProvider
+    public class IexMarketProvider : IexAbstractProvider
     {
         public static readonly string MARKET_FUNC = "market";
 
