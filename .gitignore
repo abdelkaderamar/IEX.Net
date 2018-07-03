@@ -3,3 +3,10 @@
 ################################################################################
 
 *.suo
+/IEX.Api/bin/Debug
+/IEX.Api/obj/Debug
+/IEXStatsGUI/bin/Debug
+/IEXStatsGUI/obj/Debug
+/packages/Newtonsoft.Json.11.0.2
+/Samples/MarketsVolumesCLI/bin/Debug
+/Samples/MarketsVolumesCLI/obj/Debug
