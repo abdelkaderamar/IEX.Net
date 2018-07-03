@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Data\HistoricalData.cs" />
     <Compile Include="Data\IexIntradayStat.cs" />
+    <Compile Include="Data\RecordData.cs" />
     <Compile Include="IexMarketProvider.cs" />
     <Compile Include="IexAbstractProvider.cs" />
     <Compile Include="IexStatProvider.cs" />
