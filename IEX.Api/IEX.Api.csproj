@@ -48,12 +48,14 @@
     <Compile Include="Data\HistoSummaryData.cs" />
     <Compile Include="Data\IexIntradayStat.cs" />
     <Compile Include="Data\RecordData.cs" />
+    <Compile Include="Data\Symbol.cs" />
     <Compile Include="IexMarketProvider.cs" />
     <Compile Include="IexAbstractProvider.cs" />
     <Compile Include="IexStatProvider.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Data\MarketData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
