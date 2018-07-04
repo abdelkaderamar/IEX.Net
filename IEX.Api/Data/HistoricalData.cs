@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace IEX.Api.Data
 {
@@ -35,7 +36,8 @@ namespace IEX.Api.Data
 
         public static HistoricalData FromJson(JObject json)
         {
-            var date = JsonHelper.GetDateTimeValue(json, DATE_KEY);
+            // var date = JsonHelper.GetDateTimeValue(json, DATE_KEY);
+            var date = DateTime.ParseExact(JsonHelper.GetValue(json, DATE_KEY), "yyyy-MM-dd", CultureInfo.InvariantCulture);
             var volume = JsonHelper.GetLongValue(json, VOLUME_KEY, -1);
             if (date == null || volume == -1) return null;
 

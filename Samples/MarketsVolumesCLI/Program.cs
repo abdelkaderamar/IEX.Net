@@ -51,7 +51,36 @@ namespace MarketsVolumesCLI
             var histoSummary = iexStatProvider.RequestHistoricalSummary(new DateTime(2018, 1, 1));
             Console.WriteLine(histoSummary);
 
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX historical daily stats");
+            var histoDaily = iexStatProvider.RequestHistoricalDaily();
+            Console.WriteLine(histoDaily);
+
+
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX historical stats of 30 last days");
+            var last30HistoDaily = iexStatProvider.RequestHistoricalDaily(30);
+            foreach (var data in last30HistoDaily)
+            {
+                Console.WriteLine(data);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX historical stats of November 2017");
+            var nov18HistoDaily = iexStatProvider.RequestHistoricalDaily(new DateTime(2017, 11, 1));
+            foreach (var data in nov18HistoDaily)
+            {
+                Console.WriteLine(data);
+            }
+
             Console.ReadKey();
+
         }
     }
 }
