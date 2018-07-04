@@ -55,7 +55,20 @@ namespace IEX.Api
 
         public HistoSummaryData RequestHistoricalSummary()
         {
-            var json = Request(HISTORICAL_URL).Result;
+            return RequestHistoricalSummary(HISTORICAL_URL);
+        }
+
+        public HistoSummaryData RequestHistoricalSummary(DateTime date)
+        {
+            var urlArgs = "?date=" + date.ToString("yyyyMM");
+            var url = HISTORICAL_URL + urlArgs;
+
+            return RequestHistoricalSummary(url);
+        }
+
+        protected HistoSummaryData RequestHistoricalSummary(string url)
+        { 
+            var json = Request(url).Result;
 
             if (!(json is JArray)) return null;
 

@@ -48,7 +48,7 @@ namespace MarketsVolumesCLI
             Console.WriteLine("************************************************");
             Console.WriteLine();
             Console.WriteLine("Getting IEX historical summary stats");
-            var histoSummary = iexStatProvider.RequestHistoricalSummary();
+            var histoSummary = iexStatProvider.RequestHistoricalSummary(new DateTime(2018, 1, 1));
             Console.WriteLine(histoSummary);
 
             Console.ReadKey();
