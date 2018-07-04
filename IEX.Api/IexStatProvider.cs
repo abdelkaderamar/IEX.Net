@@ -13,10 +13,12 @@ namespace IEX.Api
         public static readonly string INTRADAY_FUNC = "stats/intraday";
         public static readonly string RECENT_FUNC = "stats/recent";
         public static readonly string RECORD_FUNC = "stats/records";
+        public static readonly string HISTORICAL_FUNC = "stats/historical";
 
         public static readonly string INTRADAY_URL = BASE_URL + INTRADAY_FUNC;
         public static readonly string RECENT_URL = BASE_URL + RECENT_FUNC;
         public static readonly string RECORD_URL = BASE_URL + RECORD_FUNC;
+        public static readonly string HISTORICAL_URL = BASE_URL + HISTORICAL_FUNC;
 
         public IexIntradayStat RequestIexIntradayStat()
         {
@@ -51,9 +53,20 @@ namespace IEX.Api
             return recordData;
         }
 
-        public void IexHistoricalSummary()
+        public HistoSummaryData RequestHistoricalSummary()
         {
-            throw new NotImplementedException();
+            var json = Request(HISTORICAL_URL).Result;
+
+            if (!(json is JArray)) return null;
+
+            JArray jarray = (JArray)json;
+            if (jarray.Count == 0) return null;
+
+            var childs = jarray.Children<JObject>();
+            var child = childs.First();
+            HistoSummaryData histoSummary = HistoSummaryData.FromJson(child);
+
+            return histoSummary;
         }
 
         public void IexHistoricalDaily()

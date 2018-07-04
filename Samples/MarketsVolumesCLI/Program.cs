@@ -44,6 +44,13 @@ namespace MarketsVolumesCLI
             var recordData = iexStatProvider.RequestRecordData();
             Console.WriteLine(recordData);
 
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX historical summary stats");
+            var histoSummary = iexStatProvider.RequestHistoricalSummary();
+            Console.WriteLine(histoSummary);
+
             Console.ReadKey();
         }
     }
