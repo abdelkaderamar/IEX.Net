@@ -94,6 +94,18 @@ namespace MarketsVolumesCLI
             Console.WriteLine();
             Console.WriteLine("Total of {0} stocks", symbols.Count());
 
+            IexMarketDataProvider iexMarketDataProvider = new IexMarketDataProvider();
+
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX Lasts (Displaying those starting with X");
+            var lasts = iexMarketDataProvider.RequestLast();
+            foreach (var last in lasts)
+            {
+                if (last.Symbol.StartsWith("X")) Console.WriteLine(last);
+            }
+
             Console.ReadKey();
 
         }
