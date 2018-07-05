@@ -39,21 +39,18 @@ namespace IEX.Api
                 if (lastData != null) yield return lastData;
             }
 
-            //using (var ws = new WebSocket("https://ws-api.iextrading.com/1.0/tops/last?symbols=SNAP,fb"))
-            var socket = IO.Socket("https://ws-api.iextrading.com/1.0/last");
-            long count = 0;
-            socket.On(Socket.EVENT_CONNECT, () =>
-            {
-                socket.Emit("subscribe", "firehose");
+            //var socket = IO.Socket("https://ws-api.iextrading.com/1.0/last");
+            //long count = 0;
+            //socket.On(Socket.EVENT_CONNECT, () =>
+            //{
+            //    socket.Emit("subscribe", "ibm,fb,aapl");
 
-            });
+            //});
 
-            socket.On(Socket.EVENT_MESSAGE, (data) =>
-            {
-                Console.WriteLine("{1} Receiving a message {0}", data, ++count);
-            });
-
-            Console.ReadLine();
+            //socket.On(Socket.EVENT_MESSAGE, (data) =>
+            //{
+            //    Console.WriteLine("{1} Receiving a message {0}", data, ++count);
+            //});
         }
 
     }

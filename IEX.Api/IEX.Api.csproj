@@ -66,6 +66,7 @@
     <Compile Include="Data\RecordData.cs" />
     <Compile Include="Data\Symbol.cs" />
     <Compile Include="IexMarketDataProvider.cs" />
+    <Compile Include="IexMarketDataSubscriber.cs" />
     <Compile Include="IexMarketProvider.cs" />
     <Compile Include="IexAbstractProvider.cs" />
     <Compile Include="IexStatProvider.cs" />
