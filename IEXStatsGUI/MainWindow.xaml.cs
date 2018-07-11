@@ -23,6 +23,23 @@ namespace IEXStatsGUI
         public MainWindow()
         {
             InitializeComponent();
+
+            OrderBook = new List<OrderBookLine>();
+            OrderBook.Add(new OrderBookLine() { BidSize = 1, AskSize = 2, Bid = 10, Ask = 11 });
+
+            DataContext = this;
+        }
+
+        public IList<OrderBookLine> OrderBook { get; set; }
+
+        public class OrderBookLine
+        {
+            public long BidOrderCount { get; set; }
+            public long BidSize { get; set; }
+            public decimal Bid { get; set; }
+            public decimal Ask { get; set; }
+            public long AskSize { get; set; }
+            public long AskOrderCount { get; set; }
         }
     }
 }
