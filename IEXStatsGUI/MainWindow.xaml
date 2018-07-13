@@ -8,13 +8,15 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <DataGrid x:Name="dataGrid" Margin="10" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                  ItemsSource="{Binding OrderBook}" ColumnWidth="*" AutoGenerateColumns="False">
+                  ItemsSource="{Binding OrderBook}" ColumnWidth="*" AutoGenerateColumns="False" TargetUpdated="dataGrid_TargetUpdated">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Bid Orders" Binding="{Binding BidOrderCount}">
+                <DataGridTextColumn Header="Bid Orders" 
+                                    Binding="{Binding Path=BidOrderCount, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                         </Style>
+                        
                     </DataGridTextColumn.HeaderStyle>
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
@@ -83,6 +85,23 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
             </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property ="Background" Value="LimeGreen"/>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty=
+						  "(DataGridRow.Background).(SolidColorBrush.Color)" 
+										 Duration="00:00:03" 
+										 From="Transparent"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
         </DataGrid>
     </Grid>
 </Window>
