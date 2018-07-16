@@ -85,6 +85,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
             </DataGrid.Columns>
+            <!--
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
                     <Setter Property ="Background" Value="LimeGreen"/>
@@ -102,6 +103,7 @@
                     </Style.Triggers>
                 </Style>
             </DataGrid.Resources>
+            -->
         </DataGrid>
     </Grid>
 </Window>

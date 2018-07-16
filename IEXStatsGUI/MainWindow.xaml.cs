@@ -105,8 +105,8 @@ namespace IEXStatsGUI
             FillBehavior = FillBehavior.HoldEnd
         };
 
-        private static ColorAnimation colorAnimation = new ColorAnimation(Colors.Blue, TimeSpan.FromSeconds(5), 
-            FillBehavior.HoldEnd);
+        private static ColorAnimation colorAnimation = new ColorAnimation(Colors.Transparent, Colors.Blue, TimeSpan.FromSeconds(5));
+        // ,  FillBehavior.HoldEnd);
 
         protected virtual void OnCellChanged(object sender, CellChangeEventArgs e)
         {
@@ -124,12 +124,15 @@ namespace IEXStatsGUI
                 //Storyboard.SetTargetProperty(blink, new PropertyPath(Button.OpacityProperty));
 
                 //Storyboard.SetTarget(colorAnimation, cell.Content as TextBlock);
-                Storyboard.SetTarget(colorAnimation, cell.Content as TextBlock);
+                Storyboard.SetTarget(colorAnimation, cell);
                 Storyboard.SetTargetName(colorAnimation, "MySolidColorBrush");
-                Storyboard.SetTargetProperty(colorAnimation,
-                    new PropertyPath("Background.Color"));
 
-                sb.Begin();
+                Storyboard.SetTargetProperty(colorAnimation,
+                    new PropertyPath("(DataGridRow.Background).(SolidColorBrush.Color)"));
+                // new PropertyPath("Background"));
+                // new PropertyPath(Button.BackgroundProperty));
+
+                dataGrid.BeginStoryboard(sb);
                 //DataGridCell cell = GetCell(e.Row, e.Column, dataGrid);
                 //cell.Background = new SolidColorBrush(Colors.Red);
             }));
