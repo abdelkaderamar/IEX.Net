@@ -105,8 +105,11 @@ namespace IEXStatsGUI
             FillBehavior = FillBehavior.HoldEnd
         };
 
-        private static ColorAnimation colorAnimation = new ColorAnimation(Colors.Transparent, Colors.Blue, TimeSpan.FromSeconds(5));
-        // ,  FillBehavior.HoldEnd);
+        private static ColorAnimation greenColorAnimation = new ColorAnimation(Colors.Transparent, Colors.Green, 
+            TimeSpan.FromMilliseconds(500), FillBehavior.HoldEnd);
+
+        private static ColorAnimation redColorAnimation = new ColorAnimation(Colors.Transparent, Colors.Red,
+            TimeSpan.FromMilliseconds(500), FillBehavior.HoldEnd);
 
         protected virtual void OnCellChanged(object sender, CellChangeEventArgs e)
         {
@@ -116,25 +119,34 @@ namespace IEXStatsGUI
                 sb.Stop();
                 sb.Children.Clear();
                 //sb.Children.Add(blink);
-                sb.Children.Add(colorAnimation);
 
                 DataGridCell cell = GetCell(e.Row, e.Column, dataGrid);
 
                 //Storyboard.SetTarget(blink, cell.Content as TextBlock);
                 //Storyboard.SetTargetProperty(blink, new PropertyPath(Button.OpacityProperty));
 
-                //Storyboard.SetTarget(colorAnimation, cell.Content as TextBlock);
-                Storyboard.SetTarget(colorAnimation, cell);
-                Storyboard.SetTargetName(colorAnimation, "MySolidColorBrush");
+                if (e.Up)
+                {
+                    sb.Children.Add(greenColorAnimation);
+                    Storyboard.SetTarget(greenColorAnimation, cell);
+                    Storyboard.SetTargetName(greenColorAnimation, "MySolidColorBrush");
 
-                Storyboard.SetTargetProperty(colorAnimation,
-                    new PropertyPath("(DataGridRow.Background).(SolidColorBrush.Color)"));
-                // new PropertyPath("Background"));
-                // new PropertyPath(Button.BackgroundProperty));
+                    Storyboard.SetTargetProperty(greenColorAnimation,
+                        new PropertyPath("(DataGridRow.Background).(SolidColorBrush.Color)"));
+                }
+                else
+                {
+                    sb.Children.Add(redColorAnimation);
+                    Storyboard.SetTarget(redColorAnimation, cell);
+                    Storyboard.SetTargetName(redColorAnimation, "MySolidColorBrush");
 
-                dataGrid.BeginStoryboard(sb);
-                //DataGridCell cell = GetCell(e.Row, e.Column, dataGrid);
-                //cell.Background = new SolidColorBrush(Colors.Red);
+                    Storyboard.SetTargetProperty(redColorAnimation,
+                        new PropertyPath("(DataGridRow.Background).(SolidColorBrush.Color)"));
+
+                }
+
+                // dataGrid.BeginStoryboard(sb);
+                sb.Begin();
             }));
         }
 
