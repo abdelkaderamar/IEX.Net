@@ -11,9 +11,21 @@ namespace IEX.Api
 {
     public class IexMarketDataProvider : IexAbstractProvider
     {
+        public static readonly string TOPS_FUNC = "/tops";
         public static readonly string LAST_FUNC = "/tops/last";
 
+        public static readonly string TOPS_URL = BASE_URL + TOPS_FUNC;
         public static readonly string LAST_URL = BASE_URL + LAST_FUNC;
+
+        public IEnumerable<TopsData> RequestTops()
+        {
+            return RequestTops(TOPS_URL);
+        }
+
+        public IEnumerable<TopsData> RequestTops(string[] symbols)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<LastData> RequestLast()
         {
@@ -23,6 +35,21 @@ namespace IEX.Api
         public void RequestLast(string [] symbols)
         {
             throw new NotImplementedException();
+        }
+
+        protected IEnumerable<TopsData> RequestTops(string url)
+        {
+            var json = Request(url).Result;
+
+            if (!(json is JArray)) yield break;
+
+            JArray jarray = (JArray)json;
+
+            foreach (var child in jarray.Children<JObject>())
+            {
+                var topsData = TopsData.FromJson(child);
+                if (topsData != null) yield return topsData;
+            }
         }
 
         protected IEnumerable<LastData> RequestLast(string url)

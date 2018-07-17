@@ -96,7 +96,7 @@ namespace IEXStatsGUI
 
         }
 
-        Storyboard sb = new Storyboard();
+        // Storyboard sb = new Storyboard();
         private static DoubleAnimation blink = new DoubleAnimation()
         {
             From = 0,
@@ -106,16 +106,17 @@ namespace IEXStatsGUI
         };
 
         private static ColorAnimation greenColorAnimation = new ColorAnimation(Colors.Transparent, Colors.Green, 
-            TimeSpan.FromMilliseconds(500), FillBehavior.HoldEnd);
+            TimeSpan.FromMilliseconds(1500), FillBehavior.Stop);
 
         private static ColorAnimation redColorAnimation = new ColorAnimation(Colors.Transparent, Colors.Red,
-            TimeSpan.FromMilliseconds(500), FillBehavior.HoldEnd);
+            TimeSpan.FromMilliseconds(1250), FillBehavior.Stop);
 
         protected virtual void OnCellChanged(object sender, CellChangeEventArgs e)
         {
             
             Dispatcher.BeginInvoke(new Action(() =>
             {
+                var sb = new Storyboard();
                 sb.Stop();
                 sb.Children.Clear();
                 //sb.Children.Add(blink);

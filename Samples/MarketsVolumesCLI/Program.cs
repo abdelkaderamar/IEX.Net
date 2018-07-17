@@ -106,6 +106,16 @@ namespace MarketsVolumesCLI
                 if (last.Symbol.StartsWith("X")) Console.WriteLine(last);
             }
 
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Getting IEX Tops (Displaying those starting with Z");
+            var tops = iexMarketDataProvider.RequestTops();
+            foreach (var top in tops)
+            {
+                if (top.Symbol.StartsWith("Z")) Console.WriteLine(top);
+            }
+
             Console.ReadKey();
 
         }
