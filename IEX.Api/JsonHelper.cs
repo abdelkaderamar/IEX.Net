@@ -14,9 +14,9 @@ namespace IEX.Api
 
         public static double GetDoubleValue(JObject json, string property, double defaultValue = 0.0)
         {
-            if (json.ContainsKey(property))
+            if (json.ContainsKey(property) && json.GetValue(property) is JValue)
             {
-                string str = json.GetValue(property).ToString();
+                string str = (json.GetValue(property) as JValue).ToString(CultureInfo.InvariantCulture);
                 double value;
                 if (Double.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out value))
                     return value;
@@ -26,9 +26,9 @@ namespace IEX.Api
 
         public static decimal GetDecimalValue(JObject json, string property, decimal defaultValue = 0.0m)
         {
-            if (json.ContainsKey(property))
+            if (json.ContainsKey(property) && json.GetValue(property) is JValue)
             {
-                string str = json.GetValue(property).ToString();
+                string str = (json.GetValue(property) as JValue).ToString(CultureInfo.InvariantCulture);
                 decimal value;
                 if (Decimal.TryParse(str, NumberStyles.Number, CultureInfo.InvariantCulture, out value))
                     return value;
