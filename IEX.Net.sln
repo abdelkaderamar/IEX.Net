@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEX.Api", "IEX.Api\IEX.Api.csproj", "{E88762A0-EFEB-42FF-8AD3-AAE454EDA13B}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEXStatsGUI", "IEXStatsGUI\IEXStatsGUI.csproj", "{780E5206-4355-4975-843E-9CCDF7546502}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Samples\Sandbox\Sandbox.csproj", "{067F6668-F3A2-46DB-AE3F-360A8B2139BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TESTS", "TESTS", "{73319B46-658E-4FB3-A34C-51154A6A4F5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IexApiTests", "Tests\IexApiTests\IexApiTests.csproj", "{52190500-6464-4380-A73F-AF22D0021018}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,10 @@ Global
 		{067F6668-F3A2-46DB-AE3F-360A8B2139BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{067F6668-F3A2-46DB-AE3F-360A8B2139BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{067F6668-F3A2-46DB-AE3F-360A8B2139BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52190500-6464-4380-A73F-AF22D0021018}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52190500-6464-4380-A73F-AF22D0021018}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52190500-6464-4380-A73F-AF22D0021018}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52190500-6464-4380-A73F-AF22D0021018}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,5 +51,9 @@ Global
 		{29DB9C46-099E-4409-A9AE-B5431760262F} = {F4DB5689-AE8C-4D22-A78F-736988119023}
 		{780E5206-4355-4975-843E-9CCDF7546502} = {F4DB5689-AE8C-4D22-A78F-736988119023}
 		{067F6668-F3A2-46DB-AE3F-360A8B2139BA} = {F4DB5689-AE8C-4D22-A78F-736988119023}
+		{52190500-6464-4380-A73F-AF22D0021018} = {73319B46-658E-4FB3-A34C-51154A6A4F5F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FE22A0C-9AD3-426E-A7BF-D7C6FB5C5FF1}
 	EndGlobalSection
 EndGlobal
