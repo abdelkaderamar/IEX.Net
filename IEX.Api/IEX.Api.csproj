@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DeepData.cs" />
     <Compile Include="Data\HistoricalData.cs" />
     <Compile Include="Data\HistoSummaryData.cs" />
     <Compile Include="Data\IexIntradayStat.cs" />
