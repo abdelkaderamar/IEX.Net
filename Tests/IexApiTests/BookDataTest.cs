@@ -39,7 +39,9 @@ namespace IexApiTests
             Assert.IsNotNull(json);
             Assert.IsInstanceOfType(json, typeof(JObject));
 
-            var bookData = BookData.FromJson(json as JObject);
+            var yelpProperty = (json as JObject).First as JProperty;
+
+            var bookData = BookData.FromJson(yelpProperty);
             Assert.IsNotNull(bookData);
 
             Assert.AreEqual("YELP", bookData.Symbol);

@@ -50,12 +50,22 @@ namespace IEX.Api.Data
 
         public List<BookPrice> Asks { get; }
 
-        public static BookData FromJson(JObject json)
+        public override string ToString()
         {
-            JProperty jproperty = json.First as JProperty;
-            var symbol = (jproperty).Name;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("Book of {0}", Symbol).Append(Environment.NewLine).
+                Append("Bids:").Append(Environment.NewLine);
+            foreach (var bid in Bids) sb.AppendFormat("\t{0}", bid.ToString());
+            sb.Append("Asks:").Append(Environment.NewLine);
+            foreach (var ask in Asks) sb.AppendFormat("\t{0}", ask.ToString());
+            return sb.ToString();
+        }
+
+        public static BookData FromJson(JProperty json)
+        {
+            var symbol = json.Name;
             BookData bookData = new BookData(symbol);
-            var value = jproperty.Value as JObject;
+            var value = json.Value as JObject;
             if (value != null)
             {
                 Action<List<BookPrice>, BookPriceType, JArray> parsePrices = (prices, priceType, jarray) =>
@@ -96,6 +106,11 @@ namespace IEX.Api.Data
         public long Size { get; set; }
 
         public DateTime Timestamp { get; set; }
+
+        public override string ToString()
+        {
+            return Size + " @ " + Price + " / " + Timestamp;
+        }
 
         public static BookPrice FromJson(JObject json, BookPriceType type)
         {

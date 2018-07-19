@@ -13,9 +13,13 @@ namespace IEX.Api
     {
         public static readonly string TOPS_FUNC = "/tops";
         public static readonly string LAST_FUNC = "/tops/last";
+        public static readonly string BOOK_FUNC = "/deep/book?";
 
         public static readonly string TOPS_URL = BASE_URL + TOPS_FUNC;
         public static readonly string LAST_URL = BASE_URL + LAST_FUNC;
+        public static readonly string BOOK_URL = BASE_URL + BOOK_FUNC;
+
+        public static readonly string SYMBOLS_ARG = "symbols=";
 
         public IEnumerable<TopsData> RequestTops()
         {
@@ -35,6 +39,24 @@ namespace IEX.Api
         public void RequestLast(string [] symbols)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<BookData> RequestBook(string[] symbols)
+        {
+            var url = BOOK_URL + SYMBOLS_ARG + string.Join(",", symbols);
+            var json = Request(url).Result;
+
+            if (json == null) yield break;
+            if (!(json is JObject)) yield break;
+
+            JObject jobject = json as JObject;
+
+            foreach (var bookProperty in jobject.Children<JProperty>())
+            {
+                BookData book = BookData.FromJson(bookProperty);
+                if (book != null) yield return book;
+            }
+
         }
 
         protected IEnumerable<TopsData> RequestTops(string url)
