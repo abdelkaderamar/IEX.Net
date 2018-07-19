@@ -55,9 +55,9 @@ namespace IEX.Api.Data
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("Book of {0}", Symbol).Append(Environment.NewLine).
                 Append("Bids:").Append(Environment.NewLine);
-            foreach (var bid in Bids) sb.AppendFormat("\t{0}", bid.ToString());
+            foreach (var bid in Bids) sb.AppendFormat("\t{0}", bid.ToString()).Append(Environment.NewLine);
             sb.Append("Asks:").Append(Environment.NewLine);
-            foreach (var ask in Asks) sb.AppendFormat("\t{0}", ask.ToString());
+            foreach (var ask in Asks) sb.AppendFormat("\t{0}", ask.ToString()).Append(Environment.NewLine);
             return sb.ToString();
         }
 

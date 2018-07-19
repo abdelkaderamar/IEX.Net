@@ -126,8 +126,17 @@ namespace MarketsVolumesCLI
                 Console.WriteLine(book);
             }
 
+            IexMarketDataSubscriber subscriber = new IexMarketDataSubscriber();
+            subscriber.Subscribe("https://ws-api.iextrading.com/1.0/deep",
+                "subscribe",
+                @"{ ""symbols"" :[""fb""], ""channels"": [""book""] }", Callback);
             Console.ReadKey();
 
+        }
+
+        public static void Callback(object response)
+        {
+            Console.WriteLine(response);
         }
     }
 }
