@@ -63,6 +63,8 @@ namespace IEX.Api.Data
 
         public static BookData FromJson(JProperty json)
         {
+            if (json == null) return null;
+
             var symbol = json.Name;
             BookData bookData = new BookData(symbol);
             var value = json.Value as JObject;
