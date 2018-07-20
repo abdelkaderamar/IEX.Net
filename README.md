@@ -1,5 +1,5 @@
 IEX.NET
 
-Test
+C# API for IEXTrading 
 
 TODO
