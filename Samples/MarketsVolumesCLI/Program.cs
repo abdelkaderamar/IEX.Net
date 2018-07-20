@@ -130,6 +130,17 @@ namespace MarketsVolumesCLI
             subscriber.Subscribe("https://ws-api.iextrading.com/1.0/deep",
                 "subscribe",
                 @"{ ""symbols"" :[""fb""], ""channels"": [""book""] }", Callback);
+
+            Console.WriteLine();
+            Console.WriteLine("************************************************");
+            Console.WriteLine();
+            Console.WriteLine("Requesting Trades");
+            var trades = iexMarketDataProvider.RequestTrades(new string[] { "YELP", "FB" });
+            foreach (var trade in trades)
+            {
+                Console.WriteLine(trade);
+            }
+
             Console.ReadKey();
 
         }

@@ -13,11 +13,13 @@ namespace IEX.Api
     {
         public static readonly string TOPS_FUNC = "/tops";
         public static readonly string LAST_FUNC = "/tops/last";
-        public static readonly string BOOK_FUNC = "/deep/book?";
+        public static readonly string BOOKS_FUNC = "/deep/book?";
+        public static readonly string TRADES_FUNC = "/deep/trades?";
 
         public static readonly string TOPS_URL = BASE_URL + TOPS_FUNC;
         public static readonly string LAST_URL = BASE_URL + LAST_FUNC;
-        public static readonly string BOOK_URL = BASE_URL + BOOK_FUNC;
+        public static readonly string BOOKS_URL = BASE_URL + BOOKS_FUNC;
+        public static readonly string TRADES_URL = BASE_URL + TRADES_FUNC;
 
         public static readonly string SYMBOLS_ARG = "symbols=";
 
@@ -43,7 +45,7 @@ namespace IEX.Api
 
         public IEnumerable<BookData> RequestBook(string[] symbols)
         {
-            var url = BOOK_URL + SYMBOLS_ARG + string.Join(",", symbols);
+            var url = BOOKS_URL + SYMBOLS_ARG + string.Join(",", symbols);
             var json = Request(url).Result;
 
             if (json == null) yield break;
@@ -55,6 +57,24 @@ namespace IEX.Api
             {
                 BookData book = BookData.FromJson(bookProperty);
                 if (book != null) yield return book;
+            }
+
+        }
+
+        public IEnumerable<TradeData> RequestTrades(string[] symbols)
+        {
+            var url = TRADES_URL + SYMBOLS_ARG + string.Join(",", symbols);
+            var json = Request(url).Result;
+
+            if (json == null) yield break;
+            if (!(json is JObject)) yield break;
+
+            JObject jobject = json as JObject;
+
+            foreach (var tradeProperty in jobject.Children<JProperty>())
+            {
+                TradeData tradeData = TradeData.FromJson(tradeProperty);
+                if (tradeData != null) yield return tradeData;
             }
 
         }

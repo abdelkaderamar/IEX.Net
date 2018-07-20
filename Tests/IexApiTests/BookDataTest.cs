@@ -69,20 +69,5 @@ namespace IexApiTests
 
         }
 
-        [TestMethod]
-        public void BookDataFromJson_Empty()
-        {
-            var json = JsonConvert.DeserializeObject(@"{}");
-
-            Assert.IsNotNull(json);
-            Assert.IsInstanceOfType(json, typeof(JObject));
-
-            var jobject = json as JObject;
-            var property = jobject.First as JProperty;
-            Assert.IsNull(property);
-
-            Assert.AreEqual(0, jobject.Count);
-        }
-
     }
 }
