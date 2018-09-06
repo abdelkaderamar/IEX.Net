@@ -1,0 +1,33 @@
+﻿Reference Data:
+1. Symbols => DONE
+2. IEX Corporate Actions
+3. IEX Dividends
+4. IEX Next Day Ex Date
+5. IEX Listed Symbol Directory
+6. IEX Market Data
+
+IEX Market Data
+*1. TOPS => DONE
+*2. Last => DONE
+3. HIST
+*4. DEEP => DONE
+*5. Book => DONE
+*6. Trades => DONE
+*7. System Event
+*8. Trading Status
+*9. Operational Halt Status
+*10. Short Sale Price Test Status
+*11. Security Event
+*12. Trade Break
+*13. Auction
+*14. Official Price
+
+IEX Stats
+1. Intraday => DONE
+2. Recent => DONE
+3. Records => DONE
+4. Historical Summary => DONE
+5. Historical Daily => DONE
+
+Markets
+1. Market => DONE
